@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+h1 {
+    background-color:tomato;
+    color: white;
+    font-family: Arial Rounded MT Bold;
+    font-size: 350%;
+    text-align:center;
+}
+.button {
+    background-color: tomato;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+} 
+
+div.img1 {
+    display: block;
+    margin-left:390px;
+    margin-right:50px;
+}
+div.img2 {
+    display:block;
+    margin-left:50px;
+    margin-right:330px;
+}
+div.img1:hover {
+    border: 1px solid grey;
+}
+div.img2:hover{
+    border: 1px solid grey;
+}
+div.ex1 {
+    width:1300px;
+    height:570px;
+    margin: auto;
+    border: 3px solid tomato;
+    padding: 10px 10px;
+}
+</style>
+</head>
+<body>  
+<div class="ex1">
+<h1> FACEMASH </h1>
+<center><p style="font-family:verdana;">Welcome to facemash. Click on the picture based on their hotness. enjoy!</p></center>
+
+<table>
+ <tr>
+     <td><div class="img1"><img src="1.jpg" style="width:200px;height:250px;" id="img1"></div></td>
+     <td><div class="img2"><img src="2.jpg" style="width:200px;height:250px;" id="img2"></div></td>
+ </tr>
+</table>
+<br>
+<br>
+<br><br>
+
+<center><a href="about.htm" class="button">About</a></center>
+</div>
+<script>
+var totalImages = 41;
+var usedImages = [];
+var prefix = "images/img";
+var exte = ".jpg";
+function rand(){
+  var tr = Math.floor(Math.random()*totalImages);
+  if(usedImages.indexOf(tr)==-1){
+    usedImages.push(tr);
+    return tr;
+  }
+  return rand();
+}
+document.querySelector("#img1").addEventListener("click",function() {
+  changeImg("img2");
+});
+document.querySelector("#img2").addEventListener("click",function () {
+  changeImg("img1");
+});
+function changeImg(id) {
+    if(usedImages.length<totalImages){
+    document.querySelector("#"+id).src = prefix + rand() + exte;
+  }
+  else{
+    document.querySelector("#mainTable").innerHTML = "<h2>Images Exasted</h2>";
+  }
+    console.log(usedImages);
+}
+changeImg("img1");
+changeImg("img2");
+</script>
+</body>
+</html>
